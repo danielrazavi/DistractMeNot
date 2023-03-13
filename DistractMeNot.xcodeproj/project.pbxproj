@@ -1,0 +1,966 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68D9DD5C29BF944A009DF812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD5B29BF944A009DF812 /* AppDelegate.swift */; };
+		68D9DD5E29BF944A009DF812 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD5D29BF944A009DF812 /* SceneDelegate.swift */; };
+		68D9DD6129BF944A009DF812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5F29BF944A009DF812 /* LaunchScreen.storyboard */; };
+		68D9DD6429BF944A009DF812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD6229BF944A009DF812 /* Main.storyboard */; };
+		68D9DD6D29BF944A009DF812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD6C29BF944A009DF812 /* AppDelegate.swift */; };
+		68D9DD7029BF944A009DF812 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD6E29BF944A009DF812 /* Main.storyboard */; };
+		68D9DD7729BF944A009DF812 /* DistractMeNot Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 68D9DD7629BF944A009DF812 /* DistractMeNot Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		68D9DD8129BF944A009DF812 /* DistractMeNot Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 68D9DD8029BF944A009DF812 /* DistractMeNot Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		68D9DD8729BF944A009DF812 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4229BF9448009DF812 /* Main.html */; };
+		68D9DD8829BF944A009DF812 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4229BF9448009DF812 /* Main.html */; };
+		68D9DD8929BF944A009DF812 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4429BF9448009DF812 /* Icon.png */; };
+		68D9DD8A29BF944A009DF812 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4429BF9448009DF812 /* Icon.png */; };
+		68D9DD8B29BF944A009DF812 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4529BF9448009DF812 /* Style.css */; };
+		68D9DD8C29BF944A009DF812 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4529BF9448009DF812 /* Style.css */; };
+		68D9DD8D29BF944A009DF812 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4629BF9448009DF812 /* Script.js */; };
+		68D9DD8E29BF944A009DF812 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4629BF9448009DF812 /* Script.js */; };
+		68D9DD8F29BF944A009DF812 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD4729BF9448009DF812 /* ViewController.swift */; };
+		68D9DD9029BF944A009DF812 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD4729BF9448009DF812 /* ViewController.swift */; };
+		68D9DD9129BF944A009DF812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4829BF944A009DF812 /* Assets.xcassets */; };
+		68D9DD9229BF944A009DF812 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4829BF944A009DF812 /* Assets.xcassets */; };
+		68D9DD9329BF944A009DF812 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD4A29BF944A009DF812 /* SafariWebExtensionHandler.swift */; };
+		68D9DD9429BF944A009DF812 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD4A29BF944A009DF812 /* SafariWebExtensionHandler.swift */; };
+		68D9DD9529BF944A009DF812 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4C29BF944A009DF812 /* _locales */; };
+		68D9DD9629BF944A009DF812 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4C29BF944A009DF812 /* _locales */; };
+		68D9DD9729BF944A009DF812 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4D29BF944A009DF812 /* images */; };
+		68D9DD9829BF944A009DF812 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4D29BF944A009DF812 /* images */; };
+		68D9DD9929BF944A009DF812 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4E29BF944A009DF812 /* manifest.json */; };
+		68D9DD9A29BF944A009DF812 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4E29BF944A009DF812 /* manifest.json */; };
+		68D9DD9B29BF944A009DF812 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4F29BF944A009DF812 /* background.js */; };
+		68D9DD9C29BF944A009DF812 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD4F29BF944A009DF812 /* background.js */; };
+		68D9DD9D29BF944A009DF812 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5029BF944A009DF812 /* content.js */; };
+		68D9DD9E29BF944A009DF812 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5029BF944A009DF812 /* content.js */; };
+		68D9DD9F29BF944A009DF812 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5129BF944A009DF812 /* popup.html */; };
+		68D9DDA029BF944A009DF812 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5129BF944A009DF812 /* popup.html */; };
+		68D9DDA129BF944A009DF812 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5229BF944A009DF812 /* popup.css */; };
+		68D9DDA229BF944A009DF812 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5229BF944A009DF812 /* popup.css */; };
+		68D9DDA329BF944A009DF812 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5329BF944A009DF812 /* popup.js */; };
+		68D9DDA429BF944A009DF812 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5329BF944A009DF812 /* popup.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68D9DD7829BF944A009DF812 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68D9DD3C29BF9448009DF812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68D9DD7529BF944A009DF812;
+			remoteInfo = "DistractMeNot Extension (iOS)";
+		};
+		68D9DD8229BF944A009DF812 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68D9DD3C29BF9448009DF812 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68D9DD7F29BF944A009DF812;
+			remoteInfo = "DistractMeNot Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		68D9DDAA29BF944A009DF812 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				68D9DD7729BF944A009DF812 /* DistractMeNot Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DDB129BF944A009DF812 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				68D9DD8129BF944A009DF812 /* DistractMeNot Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		68D9DD4329BF9448009DF812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		68D9DD4429BF9448009DF812 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		68D9DD4529BF9448009DF812 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		68D9DD4629BF9448009DF812 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		68D9DD4729BF9448009DF812 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		68D9DD4829BF944A009DF812 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		68D9DD4A29BF944A009DF812 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		68D9DD4C29BF944A009DF812 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		68D9DD4D29BF944A009DF812 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		68D9DD4E29BF944A009DF812 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		68D9DD4F29BF944A009DF812 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		68D9DD5029BF944A009DF812 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		68D9DD5129BF944A009DF812 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
+		68D9DD5229BF944A009DF812 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
+		68D9DD5329BF944A009DF812 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		68D9DD5829BF944A009DF812 /* DistractMeNot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DistractMeNot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D9DD5B29BF944A009DF812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		68D9DD5D29BF944A009DF812 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		68D9DD6029BF944A009DF812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		68D9DD6329BF944A009DF812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		68D9DD6529BF944A009DF812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68D9DD6A29BF944A009DF812 /* DistractMeNot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DistractMeNot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D9DD6C29BF944A009DF812 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		68D9DD6F29BF944A009DF812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		68D9DD7129BF944A009DF812 /* DistractMeNot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DistractMeNot.entitlements; sourceTree = "<group>"; };
+		68D9DD7629BF944A009DF812 /* DistractMeNot Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DistractMeNot Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D9DD7B29BF944A009DF812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68D9DD8029BF944A009DF812 /* DistractMeNot Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DistractMeNot Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68D9DD8529BF944A009DF812 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68D9DD8629BF944A009DF812 /* DistractMeNot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DistractMeNot.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68D9DD5529BF944A009DF812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD6729BF944A009DF812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7329BF944A009DF812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7D29BF944A009DF812 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68D9DD3B29BF9448009DF812 = {
+			isa = PBXGroup;
+			children = (
+				68D9DD4029BF9448009DF812 /* Shared (App) */,
+				68D9DD4929BF944A009DF812 /* Shared (Extension) */,
+				68D9DD5A29BF944A009DF812 /* iOS (App) */,
+				68D9DD6B29BF944A009DF812 /* macOS (App) */,
+				68D9DD7A29BF944A009DF812 /* iOS (Extension) */,
+				68D9DD8429BF944A009DF812 /* macOS (Extension) */,
+				68D9DD5929BF944A009DF812 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68D9DD4029BF9448009DF812 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD4729BF9448009DF812 /* ViewController.swift */,
+				68D9DD4829BF944A009DF812 /* Assets.xcassets */,
+				68D9DD4129BF9448009DF812 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		68D9DD4129BF9448009DF812 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD4229BF9448009DF812 /* Main.html */,
+				68D9DD4429BF9448009DF812 /* Icon.png */,
+				68D9DD4529BF9448009DF812 /* Style.css */,
+				68D9DD4629BF9448009DF812 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		68D9DD4929BF944A009DF812 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD4A29BF944A009DF812 /* SafariWebExtensionHandler.swift */,
+				68D9DD4B29BF944A009DF812 /* Resources */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		68D9DD4B29BF944A009DF812 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD4C29BF944A009DF812 /* _locales */,
+				68D9DD4D29BF944A009DF812 /* images */,
+				68D9DD4E29BF944A009DF812 /* manifest.json */,
+				68D9DD4F29BF944A009DF812 /* background.js */,
+				68D9DD5029BF944A009DF812 /* content.js */,
+				68D9DD5129BF944A009DF812 /* popup.html */,
+				68D9DD5229BF944A009DF812 /* popup.css */,
+				68D9DD5329BF944A009DF812 /* popup.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		68D9DD5929BF944A009DF812 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD5829BF944A009DF812 /* DistractMeNot.app */,
+				68D9DD6A29BF944A009DF812 /* DistractMeNot.app */,
+				68D9DD7629BF944A009DF812 /* DistractMeNot Extension.appex */,
+				68D9DD8029BF944A009DF812 /* DistractMeNot Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68D9DD5A29BF944A009DF812 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD5B29BF944A009DF812 /* AppDelegate.swift */,
+				68D9DD5D29BF944A009DF812 /* SceneDelegate.swift */,
+				68D9DD5F29BF944A009DF812 /* LaunchScreen.storyboard */,
+				68D9DD6229BF944A009DF812 /* Main.storyboard */,
+				68D9DD6529BF944A009DF812 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		68D9DD6B29BF944A009DF812 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD6C29BF944A009DF812 /* AppDelegate.swift */,
+				68D9DD6E29BF944A009DF812 /* Main.storyboard */,
+				68D9DD7129BF944A009DF812 /* DistractMeNot.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		68D9DD7A29BF944A009DF812 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD7B29BF944A009DF812 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		68D9DD8429BF944A009DF812 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				68D9DD8529BF944A009DF812 /* Info.plist */,
+				68D9DD8629BF944A009DF812 /* DistractMeNot.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68D9DD5729BF944A009DF812 /* DistractMeNot (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D9DDAB29BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot (iOS)" */;
+			buildPhases = (
+				68D9DD5429BF944A009DF812 /* Sources */,
+				68D9DD5529BF944A009DF812 /* Frameworks */,
+				68D9DD5629BF944A009DF812 /* Resources */,
+				68D9DDAA29BF944A009DF812 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68D9DD7929BF944A009DF812 /* PBXTargetDependency */,
+			);
+			name = "DistractMeNot (iOS)";
+			productName = "DistractMeNot (iOS)";
+			productReference = 68D9DD5829BF944A009DF812 /* DistractMeNot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68D9DD6929BF944A009DF812 /* DistractMeNot (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D9DDB229BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot (macOS)" */;
+			buildPhases = (
+				68D9DD6629BF944A009DF812 /* Sources */,
+				68D9DD6729BF944A009DF812 /* Frameworks */,
+				68D9DD6829BF944A009DF812 /* Resources */,
+				68D9DDB129BF944A009DF812 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68D9DD8329BF944A009DF812 /* PBXTargetDependency */,
+			);
+			name = "DistractMeNot (macOS)";
+			productName = "DistractMeNot (macOS)";
+			productReference = 68D9DD6A29BF944A009DF812 /* DistractMeNot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68D9DD7529BF944A009DF812 /* DistractMeNot Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D9DDA729BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot Extension (iOS)" */;
+			buildPhases = (
+				68D9DD7229BF944A009DF812 /* Sources */,
+				68D9DD7329BF944A009DF812 /* Frameworks */,
+				68D9DD7429BF944A009DF812 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DistractMeNot Extension (iOS)";
+			productName = "DistractMeNot Extension (iOS)";
+			productReference = 68D9DD7629BF944A009DF812 /* DistractMeNot Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		68D9DD7F29BF944A009DF812 /* DistractMeNot Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68D9DDAE29BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot Extension (macOS)" */;
+			buildPhases = (
+				68D9DD7C29BF944A009DF812 /* Sources */,
+				68D9DD7D29BF944A009DF812 /* Frameworks */,
+				68D9DD7E29BF944A009DF812 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DistractMeNot Extension (macOS)";
+			productName = "DistractMeNot Extension (macOS)";
+			productReference = 68D9DD8029BF944A009DF812 /* DistractMeNot Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68D9DD3C29BF9448009DF812 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					68D9DD5729BF944A009DF812 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					68D9DD6929BF944A009DF812 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					68D9DD7529BF944A009DF812 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					68D9DD7F29BF944A009DF812 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 68D9DD3F29BF9448009DF812 /* Build configuration list for PBXProject "DistractMeNot" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 68D9DD3B29BF9448009DF812;
+			productRefGroup = 68D9DD5929BF944A009DF812 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68D9DD5729BF944A009DF812 /* DistractMeNot (iOS) */,
+				68D9DD6929BF944A009DF812 /* DistractMeNot (macOS) */,
+				68D9DD7529BF944A009DF812 /* DistractMeNot Extension (iOS) */,
+				68D9DD7F29BF944A009DF812 /* DistractMeNot Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68D9DD5629BF944A009DF812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD8929BF944A009DF812 /* Icon.png in Resources */,
+				68D9DD6129BF944A009DF812 /* LaunchScreen.storyboard in Resources */,
+				68D9DD8729BF944A009DF812 /* Main.html in Resources */,
+				68D9DD8D29BF944A009DF812 /* Script.js in Resources */,
+				68D9DD9129BF944A009DF812 /* Assets.xcassets in Resources */,
+				68D9DD6429BF944A009DF812 /* Main.storyboard in Resources */,
+				68D9DD8B29BF944A009DF812 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD6829BF944A009DF812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD8A29BF944A009DF812 /* Icon.png in Resources */,
+				68D9DD8C29BF944A009DF812 /* Style.css in Resources */,
+				68D9DD7029BF944A009DF812 /* Main.storyboard in Resources */,
+				68D9DD8E29BF944A009DF812 /* Script.js in Resources */,
+				68D9DD9229BF944A009DF812 /* Assets.xcassets in Resources */,
+				68D9DD8829BF944A009DF812 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7429BF944A009DF812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD9B29BF944A009DF812 /* background.js in Resources */,
+				68D9DDA129BF944A009DF812 /* popup.css in Resources */,
+				68D9DD9F29BF944A009DF812 /* popup.html in Resources */,
+				68D9DD9729BF944A009DF812 /* images in Resources */,
+				68D9DD9929BF944A009DF812 /* manifest.json in Resources */,
+				68D9DD9529BF944A009DF812 /* _locales in Resources */,
+				68D9DD9D29BF944A009DF812 /* content.js in Resources */,
+				68D9DDA329BF944A009DF812 /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7E29BF944A009DF812 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD9C29BF944A009DF812 /* background.js in Resources */,
+				68D9DDA229BF944A009DF812 /* popup.css in Resources */,
+				68D9DDA029BF944A009DF812 /* popup.html in Resources */,
+				68D9DD9829BF944A009DF812 /* images in Resources */,
+				68D9DD9A29BF944A009DF812 /* manifest.json in Resources */,
+				68D9DD9629BF944A009DF812 /* _locales in Resources */,
+				68D9DD9E29BF944A009DF812 /* content.js in Resources */,
+				68D9DDA429BF944A009DF812 /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68D9DD5429BF944A009DF812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD8F29BF944A009DF812 /* ViewController.swift in Sources */,
+				68D9DD5C29BF944A009DF812 /* AppDelegate.swift in Sources */,
+				68D9DD5E29BF944A009DF812 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD6629BF944A009DF812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD9029BF944A009DF812 /* ViewController.swift in Sources */,
+				68D9DD6D29BF944A009DF812 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7229BF944A009DF812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD9329BF944A009DF812 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D9DD7C29BF944A009DF812 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D9DD9429BF944A009DF812 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68D9DD7929BF944A009DF812 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68D9DD7529BF944A009DF812 /* DistractMeNot Extension (iOS) */;
+			targetProxy = 68D9DD7829BF944A009DF812 /* PBXContainerItemProxy */;
+		};
+		68D9DD8329BF944A009DF812 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68D9DD7F29BF944A009DF812 /* DistractMeNot Extension (macOS) */;
+			targetProxy = 68D9DD8229BF944A009DF812 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		68D9DD4229BF9448009DF812 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D9DD4329BF9448009DF812 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		68D9DD5F29BF944A009DF812 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D9DD6029BF944A009DF812 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		68D9DD6229BF944A009DF812 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D9DD6329BF944A009DF812 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		68D9DD6E29BF944A009DF812 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68D9DD6F29BF944A009DF812 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		68D9DDA529BF944A009DF812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		68D9DDA629BF944A009DF812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		68D9DDA829BF944A009DF812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DistractMeNot Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot.Extension;
+				PRODUCT_NAME = "DistractMeNot Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68D9DDA929BF944A009DF812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DistractMeNot Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot.Extension;
+				PRODUCT_NAME = "DistractMeNot Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68D9DDAC29BF944A009DF812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = DistractMeNot;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot;
+				PRODUCT_NAME = DistractMeNot;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68D9DDAD29BF944A009DF812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = DistractMeNot;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot;
+				PRODUCT_NAME = DistractMeNot;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68D9DDAF29BF944A009DF812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/DistractMeNot.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DistractMeNot Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot.Extension;
+				PRODUCT_NAME = "DistractMeNot Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		68D9DDB029BF944A009DF812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/DistractMeNot.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DistractMeNot Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot.Extension;
+				PRODUCT_NAME = "DistractMeNot Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		68D9DDB329BF944A009DF812 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/DistractMeNot.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DistractMeNot;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot;
+				PRODUCT_NAME = DistractMeNot;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		68D9DDB429BF944A009DF812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/DistractMeNot.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D7B8EZ9VKV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = DistractMeNot;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = danielrazavi.DistractMeNot;
+				PRODUCT_NAME = DistractMeNot;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68D9DD3F29BF9448009DF812 /* Build configuration list for PBXProject "DistractMeNot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D9DDA529BF944A009DF812 /* Debug */,
+				68D9DDA629BF944A009DF812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68D9DDA729BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D9DDA829BF944A009DF812 /* Debug */,
+				68D9DDA929BF944A009DF812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68D9DDAB29BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D9DDAC29BF944A009DF812 /* Debug */,
+				68D9DDAD29BF944A009DF812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68D9DDAE29BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D9DDAF29BF944A009DF812 /* Debug */,
+				68D9DDB029BF944A009DF812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68D9DDB229BF944A009DF812 /* Build configuration list for PBXNativeTarget "DistractMeNot (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68D9DDB329BF944A009DF812 /* Debug */,
+				68D9DDB429BF944A009DF812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68D9DD3C29BF9448009DF812 /* Project object */;
+}
