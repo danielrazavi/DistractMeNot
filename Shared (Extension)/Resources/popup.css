@@ -1,3 +1,4 @@
+/*
 :root {
     color-scheme: light dark;
 }
@@ -11,5 +12,31 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-    /* Dark Mode styles go here. */
+     /\*Dark Mode styles go here.*\/
+}
+*/
+
+/*popup.css*/
+:root {
+    color-scheme: light dark;
+    padding: 10px;
+}
+
+body {
+    padding: 10px;
+    font-family: system-ui;
+    text-align: center;
+}
+button {
+    width: 250px;
+    height: 75px;
+    border-radius: 10px;
+    color: black;
+    font-size: 14px;
+}
+
+#switch-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
 }
