@@ -3,7 +3,7 @@ browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
 });
 
 //Content.js
-let value = 'false';
+let value = false;
 let pageElements = ["secondary-inner", "comments"];
 
 const toggleDistraction = (value) => {
@@ -19,8 +19,17 @@ const toggleDistraction = (value) => {
 }
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    value = request.value;
-    toggleDistraction(value);
-    return Promise.resolve({ isSuccessful: true });
+    
+    if (request.stateSwitch != null){
+        value = request.stateSwitch;
+        toggleDistraction(value);
+    } else if (request.questionState == true) {
+        sendResponse({ stateSwitch: value });
+        console.log("the value we send to popup: ", value);
+    }
+    
+    if (request.debugMessage != null){
+        console.log("Popup debugg: ", request.debugMessage);
+    }
     
 });

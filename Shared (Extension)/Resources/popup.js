@@ -15,12 +15,34 @@ const stateSwitchOff =
 
 const sendStateSwitch = async (value) => {
     const [tab] = await browser.tabs.query({currentWindow: true, active: true})
-    browser.tabs.sendMessage(tab.id, { value })
+    browser.tabs.sendMessage(tab.id, { stateSwitch: value })
 }
 
+// Used to pass messages to the main console of safari.
+const debuggMe = async (mssg) => {
+    const [tab] = await browser.tabs.query({currentWindow: true, active: true})
+    browser.tabs.sendMessage(tab.id, { debugMessage: mssg })
+}
 
-if (!stateSwitch){
-    var stateSwitch = stateSwitchOff;
+//Check to see if the extension is on or off
+var stateSwitchValue = false;
+async function getStateSwitch() {
+    let switchValue;
+    const [tab] = await browser.tabs.query({currentWindow: true, active: true})
+    await browser.tabs.sendMessage(tab.id, { questionState: true }).then((response) => {
+        switchValue = response.stateSwitch;
+    });
+
+    return switchValue;
+}
+
+stateSwitchValue = await getStateSwitch();
+
+var stateSwitch;
+if (stateSwitchValue){
+    stateSwitch = stateSwitchOn;
+} else {
+    stateSwitch = stateSwitchOff;
 }
 
 const button = document.createElement('button');
