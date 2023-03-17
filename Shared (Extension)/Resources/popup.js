@@ -1,64 +1,92 @@
 //popup.js
-const stateSwitchOn =
+const switchStateOn =
 {
-    name: "On",
+    name: "Click to Turn Off",
     value: true,
-    color: '#F5F5F5'
-}
-
-const stateSwitchOff =
-{
-    name: "Off",
-    value: false,
     color: '#9E9E9E'
 }
 
-const sendStateSwitch = async (value) => {
+const switchStateOff =
+{
+    name: "Click to Turn On",
+    value: false,
+    color: '#F5F5F5'
+}
+
+const sendSwitchState = async () => {
     const [tab] = await browser.tabs.query({currentWindow: true, active: true})
-    browser.tabs.sendMessage(tab.id, { stateSwitch: value })
+    browser.tabs.sendMessage(tab.id, { triggerSwitchState: true })
 }
 
-// Used to pass messages to the main console of safari.
-const debuggMe = async (mssg) => {
-    const [tab] = await browser.tabs.query({currentWindow: true, active: true})
-    browser.tabs.sendMessage(tab.id, { debugMessage: mssg })
+function setButtonConfigs(button, switchState){
+    button.style.background = switchState.color;
+    button.innerText = switchState.name;
 }
 
-//Check to see if the extension is on or off
-var stateSwitchValue = false;
-async function getStateSwitch() {
-    let switchValue;
-    const [tab] = await browser.tabs.query({currentWindow: true, active: true})
-    await browser.tabs.sendMessage(tab.id, { questionState: true }).then((response) => {
-        switchValue = response.stateSwitch;
-    });
+/*
+ Decides how to set the button configuration and local storage based off of what the state of the switch currently is and whether if it is in init mode for click mode. If "init" mode, then it will simply set the button as what the state is. if "click" mode, then it toggles what the switch state is and configures the button, while updating the local storage.
+ */
+function switchLogic(switchStateFromStorage, button, mode) {
 
-    return switchValue;
-}
-
-stateSwitchValue = await getStateSwitch();
-
-var stateSwitch;
-if (stateSwitchValue){
-    stateSwitch = stateSwitchOn;
-} else {
-    stateSwitch = stateSwitchOff;
-}
-
-const button = document.createElement('button');
-button.style.background = stateSwitch.color;
-button.innerText = stateSwitch.name;
-
-document.querySelector('#switch-container').appendChild(button);
-
-button.addEventListener('click', e => {
-    if (button.innerText == stateSwitchOff.name){
-        stateSwitch = stateSwitchOn;
-    } else {
-        stateSwitch = stateSwitchOff;
+    if ( mode != 'init' && mode != 'click' ) {
+        throw new Error('switchLogic not given correct mode.');
     }
-    button.style.background = stateSwitch.color
-    button.innerText = stateSwitch.name
-    sendStateSwitch(stateSwitch.value)
-})
+    
+    let localSwitchState;
+    let updateStorage = false;
+    
+    if (typeof switchStateFromStorage === 'undefined') {
+        switchStateFromStorage = false;
+        updateStorage = true;
+    }
+    
+    if (mode == 'click'){
+        switchStateFromStorage = !switchStateFromStorage;
+        updateStorage = true;
+    }
+    
+    if (switchStateFromStorage){
+        localSwitchState = switchStateOn;
+    } else {
+        localSwitchState = switchStateOff;
+    }
+    
+    setButtonConfigs(button, localSwitchState); // TODO: FIX: this needs a button
+    
+    if (updateStorage){
+        setSwitchState(sendSwitchState, localSwitchState.value);
+    }
+    
+}
+
+/*
+ 1. Gets the switch state from local storage.
+ 2. Excutes the callback function using the switch state attained.
+ */
+function getSwitchState(getSwichStateCallback, button, mode) {
+    browser.storage.local.get('switchState',(response) => {
+        getSwichStateCallback(response.switchState, button, mode)
+    });
+}
+/*
+ 1. Sets the switch state to local storage.
+ */
+function setSwitchState(setSwitchStateCallback, state) {
+    browser.storage.local.set({'switchState': state});
+    setSwitchStateCallback();
+}
+
+function createToggleButton(divName){
+    const button = document.createElement(divName);
+    getSwitchState(switchLogic, button, 'init');
+    document.querySelector('#switch-container').appendChild(button);
+    
+    button.addEventListener('click', e => {
+        getSwitchState(switchLogic, button, 'click');
+    })
+}
+
+// Button Creation
+createToggleButton('button');
+
 
