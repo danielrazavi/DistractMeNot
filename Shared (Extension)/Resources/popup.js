@@ -1,16 +1,16 @@
 //popup.js
 const switchStateOn =
 {
-    name: "Click to Turn Off",
+    name: "On 🌞",
     value: true,
-    color: '#9E9E9E'
+    color: '#FFEB3B'
 }
 
 const switchStateOff =
 {
-    name: "Click to Turn On",
+    name: "Off 🌚",
     value: false,
-    color: '#F5F5F5'
+    color: '#78909c'
 }
 
 const sendSwitchState = async () => {
