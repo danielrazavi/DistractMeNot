@@ -13,11 +13,6 @@ const switchStateOff =
     color: '#78909c'
 }
 
-const sendSwitchState = async () => {
-    const [tab] = await browser.tabs.query({currentWindow: true, active: true})
-    browser.tabs.sendMessage(tab.id, { triggerSwitchState: true })
-}
-
 function setButtonConfigs(button, switchState){
     button.style.background = switchState.color;
     button.innerText = switchState.name;
@@ -35,11 +30,6 @@ function switchLogic(switchStateFromStorage, button, mode) {
     let localSwitchState;
     let updateStorage = false;
     
-    if (typeof switchStateFromStorage === 'undefined') {
-        switchStateFromStorage = false;
-        updateStorage = true;
-    }
-    
     if (mode == 'click'){
         switchStateFromStorage = !switchStateFromStorage;
         updateStorage = true;
@@ -54,7 +44,7 @@ function switchLogic(switchStateFromStorage, button, mode) {
     setButtonConfigs(button, localSwitchState); // TODO: FIX: this needs a button
     
     if (updateStorage){
-        setSwitchState(sendSwitchState, localSwitchState.value);
+        setSwitchState(localSwitchState.value);
     }
     
 }
@@ -71,9 +61,8 @@ function getSwitchState(getSwichStateCallback, button, mode) {
 /*
  1. Sets the switch state to local storage.
  */
-function setSwitchState(setSwitchStateCallback, state) {
+function setSwitchState(state) {
     browser.storage.local.set({'switchState': state});
-    setSwitchStateCallback();
 }
 
 function createToggleButton(divName){
