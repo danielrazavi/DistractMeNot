@@ -1,5 +1,3 @@
-let pageElements = ["secondary-inner", "comments"];
-
 function waitForElm(selector) {
     return new Promise(resolve => {
         if (document.querySelector(selector)) {
@@ -20,17 +18,20 @@ function waitForElm(selector) {
     });
 }
 
-const enforceSwitchState = (value) => {
-    var element;
-    pageElements.forEach(elementId => {
-        waitForElm("#"+elementId).then((element) => {
-            if (value) {
-                element.style.display = "none";
-            } else {
-                element.style.display = "block";
-            }
-        });
+
+const visibility = (value, elementId) => {
+    waitForElm(elementId).then((element) => {
+        if (value) {
+            element.style.display = "none";
+        } else {
+            element.style.display = "block";
+        }
     });
+}
+
+const enforceSwitchStateOnYouTubeWatch = (value) => {
+    visibility(value, "#secondary-inner");
+    visibility(value, "#comments");
 }
 
 browser.storage.onChanged.addListener((changes, area) => {
@@ -38,7 +39,7 @@ browser.storage.onChanged.addListener((changes, area) => {
         Object.keys(changes).length == 1 &&
         'switchState' in changes){
         let value = changes['switchState'].newValue;
-        enforceSwitchState(value);
+        enforceSwitchStateOnYouTubeWatch(value);
     }
 });
 
@@ -49,6 +50,6 @@ window.onload = function() {
         value = response.switchState;
         console.log("after the refresh, value is ", value);
         // The first default enforcement.
-        enforceSwitchState(value);
+        enforceSwitchStateOnYouTubeWatch(value);
     });
 }

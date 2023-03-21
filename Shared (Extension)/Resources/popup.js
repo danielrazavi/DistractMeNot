@@ -41,7 +41,7 @@ function switchLogic(switchStateFromStorage, button, mode) {
         localSwitchState = switchStateOff;
     }
     
-    setButtonConfigs(button, localSwitchState); // TODO: FIX: this needs a button
+    setButtonConfigs(button, localSwitchState);
     
     if (updateStorage){
         setSwitchState(localSwitchState.value);
@@ -63,6 +63,8 @@ function getSwitchState(getSwichStateCallback, button, mode) {
  */
 function setSwitchState(state) {
     browser.storage.local.set({'switchState': state});
+    console.log("flicking the switch.")
+    console.log(browser.storage.local.get('switchState'));
 }
 
 function createToggleButton(divName){
