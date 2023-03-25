@@ -19,9 +19,14 @@
     },
 
     "content_scripts": [{
+        "js": [ "content-YouTube-Home.js" ],
+        "matches": [
+            "https://www.youtube.com/"
+        ]
+    }, {
         "js": [ "content.js" ],
         "matches": [
-            "https://www.youtube.com/*"
+            "https://www.youtube.com/watch*"
         ]
     }],
 

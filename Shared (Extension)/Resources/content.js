@@ -19,22 +19,33 @@ function waitForElm(selector) {
 }
 
 
-const visibility = (value, elementId) => {
-    waitForElm(elementId).then((element) => {
-        if (value) {
-            element.style.display = "none";
-        } else {
-            element.style.display = "block";
-        }
-    });
+const visibility = (value, element) => {
+    if (value) {
+        element.style.display = "none";
+    } else {
+        element.style.display = "block";
+    }
 }
 
 const enforceSwitchStateOnYouTubeWatch = (value) => {
-    visibility(value, "#secondary-inner");
-    visibility(value, "#comments");
+    waitForElm("#secondary-inner").then((element) => {
+        visibility(value, element)
+    });
+    
+    waitForElm("#comments").then((element) => {
+        visibility(value, element)
+    });
+    
 }
 
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+            this.tabUpdatedHandler(tabId, changeInfo, tabInfo);
+        });
+
+
 browser.storage.onChanged.addListener((changes, area) => {
+    console.log("content")
+    console.log(changes);
     if (area == 'local' &&
         Object.keys(changes).length == 1 &&
         'switchState' in changes){
