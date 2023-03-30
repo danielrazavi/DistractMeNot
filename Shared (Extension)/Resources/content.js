@@ -18,38 +18,108 @@ function waitForElm(selector) {
     });
 }
 
+function visibility(value, element) {
+    if (value) {
+        element.style.display = "none";
+    } else {
+        element.style.display = "block";
+    }
+}
 
-const visibility = (value, elementId) => {
-    waitForElm(elementId).then((element) => {
-        if (value) {
-            element.style.display = "none";
-        } else {
-            element.style.display = "block";
-        }
+function enforceSwitchStateOnYouTubeWatch(value) {
+    waitForElm("#secondary-inner").then((element) => {
+        visibility(value, element)
+    });
+    waitForElm("#comments").then((element) => {
+        visibility(value, element)
     });
 }
 
-const enforceSwitchStateOnYouTubeWatch = (value) => {
-    visibility(value, "#secondary-inner");
-    visibility(value, "#comments");
+function enforceSwitchStateOnYouTubeHome(value) {
+    waitForElm("#page-manager").then((element) => {
+        visibility(value, element)
+    });
+    
+    waitForElm("#sections").then((element) => {
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            if (i != 0 && i != 4){
+                visibility(value, element.children[i]);
+            }
+        }
+    });
+    
+    waitForElm("#buttons").then((element) => {
+        visibility(value, element.children[1]);
+    });
+    
+    /* TODO: there are two items in the html page... what am I to do?
+    waitForElm("#items").then((element) => {
+        visibility(value, element.children[1]);
+        console.log(element.children[1]);
+    });
+    */
+}
+
+function enforceSwitchStateOnYouTube(state, page){
+    
+    if (page == "home"){
+        if (state == true){
+            console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeWatch with state: ", !state);
+            enforceSwitchStateOnYouTubeWatch(!state);
+        }
+        console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeHome with state: ", state);
+        enforceSwitchStateOnYouTubeHome(state);
+    } else if (page == "watch"){
+        if (state == true){
+            enforceSwitchStateOnYouTubeHome(!state);
+            console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeHome with state: ", !state);
+        }
+        console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeWatch with state: ", state);
+        enforceSwitchStateOnYouTubeWatch(state);
+        
+    } else if (page == "feed"){
+        // This should change.
+        enforceSwitchStateOnYouTubeHome(false);
+        enforceSwitchStateOnYouTubeWatch(false);
+        if (state == true){
+            console.log("enforceSwitchStateOnYouTube: We're on feed so turning off other filters. ", !state);
+        }
+    }
 }
 
 browser.storage.onChanged.addListener((changes, area) => {
-    if (area == 'local' &&
-        Object.keys(changes).length == 1 &&
-        'switchState' in changes){
-        let value = changes['switchState'].newValue;
-        enforceSwitchStateOnYouTubeWatch(value);
+    if (area == 'local' && Object.keys(changes).length == 1 && 'switchState' in changes){
+        
+        browser.storage.local.get('youTubePage',(response) => {
+            page = response.youTubePage;
+            console.log("Page loaded. Enforcing Switch State on Youtube with: ", changes['switchState'].newValue, page);
+            enforceSwitchStateOnYouTube(changes['switchState'].newValue, page);
+        });
+        
+    } else if (area == 'local' && Object.keys(changes).length == 1 && 'youTubePage' in changes) {
+        
+        browser.storage.local.get('switchState',(response) => {
+            state = response.switchState;
+            console.log("Page loaded. Enforcing Switch State on Youtube with: ", state, changes['youTubePage'].newValue);
+            enforceSwitchStateOnYouTube(state, changes['youTubePage'].newValue);
+        });
+        
+        // console.log(changes['youTubePage'].newValue); // TODO: this is sometimes undefined, needs to be investigated...
+        
     }
+    
 });
 
 
 //Content.js
-window.onload = function() {
-    browser.storage.local.get('switchState',(response) => {
-        value = response.switchState;
-        console.log("after the refresh, value is ", value);
-        // The first default enforcement.
-        enforceSwitchStateOnYouTubeWatch(value);
+window.onload = function() { // TODO: what does this window.onload even do? Is it being used correctly?
+    browser.storage.local.get('switchState', (switchStateResponse) => {
+        state = switchStateResponse.switchState;
+        browser.storage.local.get('youTubePage', (youTubePageResponse) => {
+            page = youTubePageResponse.youTubePage;
+            // browser.storage.local.remove("youTubePage"); // TODO: is this necessary? the data is on users laptop anyways? session instead?
+            console.log("Page loaded. Enforcing Switch State on Youtube with: ", state, page);
+            enforceSwitchStateOnYouTube(state, page);
+        })
     });
 }

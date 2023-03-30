@@ -17,19 +17,7 @@
     "background": {
         "service_worker": "background.js"
     },
-
-    "content_scripts": [{
-        "js": [ "content.js" ],
-        "matches": [
-            "https://www.youtube.com/watch*"
-        ]
-    }, {
-        "js": [ "content-YouTube-Home.js" ],
-        "matches": [
-            "https://www.youtube.com/"
-        ]
-    }],
-
+    
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
@@ -43,6 +31,12 @@
     },
 
     "permissions": [
-        "storage"
+        "storage",
+        "scripting"
+    ],
+    
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
     ]
 }
