@@ -1,13 +1,11 @@
 //popup.js
-const switchStateOn =
-{
+const switchStateOn = {
     name: "On 🌞",
     value: true,
     color: '#FFEB3B'
 }
 
-const switchStateOff =
-{
+const switchStateOff = {
     name: "Off 🌚",
     value: false,
     color: '#78909c'
@@ -18,23 +16,48 @@ function setButtonConfigs(button, switchState){
     button.innerText = switchState.name;
 }
 
-/*
+/* 📍
  Decides how to set the button configuration and local storage based off of what the state of the switch currently is and whether if it is in init mode for click mode. If "init" mode, then it will simply set the button as what the state is. if "click" mode, then it toggles what the switch state is and configures the button, while updating the local storage.
  */
-function switchLogic(switchStateFromStorage, button, mode) {
+async function switchLogic(switchStateFromStorage, button, mode) {
 
     if ( mode != 'init' && mode != 'click' ) {
         throw new Error('switchLogic not given correct mode.');
     }
     
-    let localSwitchState;
     let updateStorage = false;
     
     if (mode == 'click'){
         switchStateFromStorage = !switchStateFromStorage;
         updateStorage = true;
+        
+        /*
+        // ✅ Experiment: Sending message to background.js
+        const sending = browser.runtime.sendMessage({injectContentScript: true});
+        sending.then(handleResponse, handleError);
+        
+        // ✅ Experiment: Sending message to content.js
+        const sendingOver = browser.tabs
+            .query({
+              currentWindow: true,
+              active: true,
+            });
+        sendingOver.then(sendMessageToTabs).catch(onError);
+        */
+        
+    } else if (mode == 'init'){
+        // TODO: https://is.gd/u4bNrD
+        try {
+            const response = await browser.runtime.sendMessage({injectContentScript: true});
+            console.log(`Received a Message: ${response.successful}`);
+        } catch(error){
+            console.error(`Error: ${error}`);
+        }
     }
     
+    console.log("sendMessage 2");
+    
+    let localSwitchState;
     if (switchStateFromStorage){
         localSwitchState = switchStateOn;
     } else {
@@ -46,6 +69,7 @@ function switchLogic(switchStateFromStorage, button, mode) {
     if (updateStorage){
         setSwitchState(localSwitchState.value);
     }
+    console.log("sendMessage 3");
     
 }
 
@@ -53,27 +77,46 @@ function switchLogic(switchStateFromStorage, button, mode) {
  1. Gets the switch state from local storage.
  2. Excutes the callback function using the switch state attained.
  */
-function getSwitchState(getSwichStateCallback, button, mode) {
-    browser.storage.local.get('switchState',(response) => {
-        getSwichStateCallback(response.switchState, button, mode)
-    });
+async function getSwitchState() {
+    try{
+        return browser.storage.local.get('switchState');
+        //getSwichStateCallback(response.switchState, button, mode);
+    }
+    catch(error){
+        console.log("getSwitchState failed.", error)
+    }
 }
+
 /*
  1. Sets the switch state to local storage.
  */
-function setSwitchState(state) {
-    browser.storage.local.set({'switchState': state});
-    console.log("flicking the switch.")
-    console.log(browser.storage.local.get('switchState'));
+async function setSwitchState(state) {
+    try{
+        browser.storage.local.set({'switchState': state});
+        console.log("switch flicked.");
+    } catch(error){
+        console.log("setSwitchState failed", error);
+    }
 }
 
-function createToggleButton(divName){
+async function createToggleButton(divName){
     const button = document.createElement(divName);
-    getSwitchState(switchLogic, button, 'init');
+    
+    let response;
+    try{
+        response = await getSwitchState();
+        switchLogic(response.switchState, button, 'init');
+    }
+    catch(error){
+        console("ERROR IN CREATE TOGGLE BUTTON", error)
+        switchLogic(false, button, 'init');
+    }
+    
     document.querySelector('#switch-container').appendChild(button);
     
-    button.addEventListener('click', e => {
-        getSwitchState(switchLogic, button, 'click');
+    button.addEventListener('click', async e => {
+        response = await getSwitchState();
+        switchLogic(response.switchState, button, 'click');
     })
 }
 
@@ -81,3 +124,30 @@ function createToggleButton(divName){
 createToggleButton('button');
 
 
+function handleResponse(message) {
+    console.log(`Received a Message: ${message.response}`);
+}
+function handleError(error) {
+    console.log(`Error: ${error}`);
+}
+
+async function pingTheMainTab(tab) {
+    console.log("pinging The Main Tab...");
+    try {
+        console.log("start");
+        const response  = await browser.tabs.sendMessage(tab.id, { hello: true });
+        console.log("response");
+        console.log(response);
+        if (response.hiBack){
+            console.log("Message to Main Tab was Delivered.");
+            return true;
+        } else {
+            console.log("Message to Main Tab was not Delivered.");
+            return false;
+        }
+    } catch(error) {
+        console.log("sendMessageToMainTab failed", error);
+        return false;
+    }
+    
+}

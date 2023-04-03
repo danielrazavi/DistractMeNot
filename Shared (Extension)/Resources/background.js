@@ -2,37 +2,48 @@ browser.runtime.onInstalled.addListener(() => {
     browser.storage.local.set({'switchState': false}, () => {
         console.log("Storage Succesful");
     });
+    
 });
 
 browser.runtime.onStartup.addListener(() => {
     browser.storage.local.get('switchState',(response) => {
         value = response.switchState;
-        console.log("On startup the value is", value);
+        browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
+            tab = (tabs.length === 0 ? tabs : tabs[0]);
+            console.log("extension starting for the first time...")
+            console.log("running urlUpdate...")
+            urlUpdated(tab.id, tab.url);
+        });
     });
-    
 });
 
 // TODO: are other runtime listeners needed here?
 
-
 async function executeTheScript(targetId, fileString){
     try{
-        await browser.scripting.executeScript({
-            target: {
-                tabId: targetId,
-            },
+        let result = await browser.scripting.executeScript({
+            target: { tabId: targetId },
             files: [ fileString ],
-        }).then(() => {console.log("script injection successful")});
-    }catch (err) {
-        console.error(`failed to execute script: ${err}`);
+        });
+//        console.log("executeScript result: ", [{result}]);
+    }catch (error) {
+        console.log("failed to execute script: ", error);
+    }
+}
+
+
+async function removeAllPageKeys(){
+    // TODO: what will happen if key value doesn't exist in storage?
+    try{
+        // For multiple:        browser.storage.local.remove(['testy','youTubePage']);
+        browser.storage.local.remove(["youTubePage"]);
+    }
+    catch(error){
+        console.log("removeAllPageKeys failed.", error)
     }
 }
 
 function handleYouTubePages(tabId, url){
-
-    // TODO: should this call be made at the end of the function?
-    // TODO: maybe a good idea to send messages to content.js rather than this?
-    executeTheScript(tabId, "/content.js");
     
     let page;
     
@@ -49,24 +60,51 @@ function handleYouTubePages(tabId, url){
     }
         
     console.log("We're in YouTube ", page);
-    browser.storage.local.set({"youTubePage": page});
+    browser.storage.local.set({'youTubePage': page});
 }
 
 // function that handles what happens to the new url provided.
-function urlUpdated(tabId, changeInfo, tabInfo){
+async function urlUpdated(tabId, givenURL){
 
-    if (!tabInfo.url){
+    if (!givenURL){
         return;
     }
 
-    if (tabInfo.url.match("^https://www\.youtube\.com/.*$") == tabInfo.url) {
-        console.log("We're in YouTube!");
-        handleYouTubePages(tabId, tabInfo.url);
+    if (givenURL.match("^https://www\.youtube\.com/.*$") == givenURL) {
+        console.log("In youtube page");
+        let response = await browser.storage.local.get('youTubePage');
+        if (response.youTubePage){
+            console.log("no need for injection");
+            handleYouTubePages(tabId, givenURL);
+        } else {
+            console.log("injecting");
+            executeTheScript(tabId, "/content.js");
+            removeAllPageKeys();
+            handleYouTubePages(tabId, givenURL);
+        }
+
     } else {
-        console.log("We're in a page not known to the script.");
+        console.log("In an unrecgonized page");
+        removeAllPageKeys();
     }
 }
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
-    urlUpdated(tabId, changeInfo, tabInfo);
+    urlUpdated(tabId, tabInfo.url);
 });
+
+
+function handleMessage(request, sender, sendResponse) {
+    if (request.injectContentScript == true){
+        console.log("popup is requesting content script injection.");
+        
+        browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
+            tab = (tabs.length === 0 ? tabs : tabs[0]);
+            urlUpdated(tab.id, tab.url);
+        });
+        sendResponse({successful: "injection successful."});
+    }
+    
+}
+
+browser.runtime.onMessage.addListener(handleMessage);

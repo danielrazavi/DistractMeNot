@@ -60,30 +60,42 @@ function enforceSwitchStateOnYouTubeHome(value) {
     */
 }
 
+function enforceSwitchStateOnYouTubeFeed(value) {
+    
+    waitForElm("#sections").then((element) => {
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            if (i != 0 && i != 4){
+                visibility(value, element.children[i]);
+            }
+        }
+    });
+    
+    waitForElm("#buttons").then((element) => {
+        visibility(value, element.children[1]);
+    });
+}
+
 function enforceSwitchStateOnYouTube(state, page){
     
     if (page == "home"){
         if (state == true){
-            console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeWatch with state: ", !state);
             enforceSwitchStateOnYouTubeWatch(!state);
+            enforceSwitchStateOnYouTubeFeed(!state)
         }
-        console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeHome with state: ", state);
         enforceSwitchStateOnYouTubeHome(state);
     } else if (page == "watch"){
         if (state == true){
             enforceSwitchStateOnYouTubeHome(!state);
-            console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeHome with state: ", !state);
+            enforceSwitchStateOnYouTubeFeed(!state)
         }
-        console.log("enforceSwitchStateOnYouTube: running enforceSwitchStateOnYouTubeWatch with state: ", state);
         enforceSwitchStateOnYouTubeWatch(state);
         
     } else if (page == "feed"){
-        // This should change.
-        enforceSwitchStateOnYouTubeHome(false);
-        enforceSwitchStateOnYouTubeWatch(false);
         if (state == true){
-            console.log("enforceSwitchStateOnYouTube: We're on feed so turning off other filters. ", !state);
+            enforceSwitchStateOnYouTubeHome(!state);
+            enforceSwitchStateOnYouTubeWatch(!state);
         }
+        enforceSwitchStateOnYouTubeFeed(state)
     }
 }
 
@@ -110,14 +122,13 @@ browser.storage.onChanged.addListener((changes, area) => {
     
 });
 
-
 //Content.js
 window.onload = function() { // TODO: what does this window.onload even do? Is it being used correctly?
     browser.storage.local.get('switchState', (switchStateResponse) => {
         state = switchStateResponse.switchState;
         browser.storage.local.get('youTubePage', (youTubePageResponse) => {
             page = youTubePageResponse.youTubePage;
-            // browser.storage.local.remove("youTubePage"); // TODO: is this necessary? the data is on users laptop anyways? session instead?
+            browser.storage.local.remove("youTubePage"); // TODO: is this necessary? the data is on users laptop anyways? session instead?
             console.log("Page loaded. Enforcing Switch State on Youtube with: ", state, page);
             enforceSwitchStateOnYouTube(state, page);
         })

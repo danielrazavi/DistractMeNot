@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68BE8B9329CF81F0004204D0 /* content-YouTube-Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 68BE8B9229CF81F0004204D0 /* content-YouTube-Home.js */; };
-		68BE8B9429CF81F0004204D0 /* content-YouTube-Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 68BE8B9229CF81F0004204D0 /* content-YouTube-Home.js */; };
 		68D9DD5C29BF944A009DF812 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD5B29BF944A009DF812 /* AppDelegate.swift */; };
 		68D9DD5E29BF944A009DF812 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D9DD5D29BF944A009DF812 /* SceneDelegate.swift */; };
 		68D9DD6129BF944A009DF812 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68D9DD5F29BF944A009DF812 /* LaunchScreen.storyboard */; };
@@ -92,7 +90,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		68BE8B9229CF81F0004204D0 /* content-YouTube-Home.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "content-YouTube-Home.js"; sourceTree = "<group>"; };
 		68D9DD4329BF9448009DF812 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
 		68D9DD4429BF9448009DF812 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		68D9DD4529BF9448009DF812 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
@@ -206,7 +203,6 @@
 				68D9DD4C29BF944A009DF812 /* _locales */,
 				68D9DD4D29BF944A009DF812 /* images */,
 				68D9DD4E29BF944A009DF812 /* manifest.json */,
-				68BE8B9229CF81F0004204D0 /* content-YouTube-Home.js */,
 				68D9DD4F29BF944A009DF812 /* background.js */,
 				68D9DD5029BF944A009DF812 /* content.js */,
 				68D9DD5129BF944A009DF812 /* popup.html */,
@@ -419,7 +415,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D9DD9B29BF944A009DF812 /* background.js in Resources */,
-				68BE8B9329CF81F0004204D0 /* content-YouTube-Home.js in Resources */,
 				68D9DDA129BF944A009DF812 /* popup.css in Resources */,
 				68D9DD9F29BF944A009DF812 /* popup.html in Resources */,
 				68D9DD9729BF944A009DF812 /* images in Resources */,
@@ -435,7 +430,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D9DD9C29BF944A009DF812 /* background.js in Resources */,
-				68BE8B9429CF81F0004204D0 /* content-YouTube-Home.js in Resources */,
 				68D9DDA229BF944A009DF812 /* popup.css in Resources */,
 				68D9DDA029BF944A009DF812 /* popup.html in Resources */,
 				68D9DD9829BF944A009DF812 /* images in Resources */,
