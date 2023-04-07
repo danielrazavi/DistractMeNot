@@ -79,6 +79,16 @@ function enforceSwitchStateOnYouTubeFeed(value) {
         visibility(value, element.children[1]);
         console.log(element.children[1]);
     });
+    
+    //Removal of Shorts from the subscription feed.
+    waitForElm("#page-manager #primary #contents").then((element) => {
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            let isShort = element.children[i].querySelectorAll("ytd-thumbnail-overlay-time-status-renderer[overlay-style='SHORTS']").length == 1;
+            if (isShort){
+                visibility(value, element.children[i]);
+            }
+        }
+    });
 }
 
 function enforceSwitchStateOnYouTube(state, page){
