@@ -36,6 +36,12 @@ function enforceSwitchStateOnYouTubeWatch(value) {
     waitForElm("#buttons").then((element) => {
         visibility(value, element.children[1]);
     });
+    
+    waitForElm(".ytp-ad-skip-button").then((element) => {
+        console.log("ad skipped!");
+        element.click();
+    })
+    
 }
 
 function enforceSwitchStateOnYouTubeHome(value) {
@@ -57,7 +63,6 @@ function enforceSwitchStateOnYouTubeHome(value) {
     
     waitForElm("#sections #items").then((element) => {
         visibility(value, element.children[1]);
-        console.log(element.children[1]);
     });
 }
 
@@ -77,7 +82,6 @@ function enforceSwitchStateOnYouTubeFeed(value) {
     
     waitForElm("#sections #items").then((element) => {
         visibility(value, element.children[1]);
-        console.log(element.children[1]);
     });
     
     //Removal of Shorts from the subscription feed.
@@ -120,7 +124,7 @@ browser.storage.onChanged.addListener((changes, area) => {
         
         browser.storage.local.get('youTubePage',(response) => {
             page = response.youTubePage;
-            console.log("Page loaded. Enforcing Switch State on Youtube with: ", changes['switchState'].newValue, page);
+            console.log("Page loaded. Enforcing Switch State on Youtube with (switchState change): ", changes['switchState'].newValue, page);
             enforceSwitchStateOnYouTube(changes['switchState'].newValue, page);
         });
         
@@ -128,7 +132,7 @@ browser.storage.onChanged.addListener((changes, area) => {
         
         browser.storage.local.get('switchState',(response) => {
             state = response.switchState;
-            console.log("Page loaded. Enforcing Switch State on Youtube with: ", state, changes['youTubePage'].newValue);
+            console.log("Page loaded. Enforcing Switch State on Youtube with (youtubepage change): ", state, changes['youTubePage'].newValue);
             enforceSwitchStateOnYouTube(state, changes['youTubePage'].newValue);
         });
         
@@ -145,7 +149,7 @@ window.onload = function() { // TODO: what does this window.onload even do? Is i
         browser.storage.local.get('youTubePage', (youTubePageResponse) => {
             page = youTubePageResponse.youTubePage;
             browser.storage.local.remove("youTubePage"); // TODO: is this necessary? the data is on users laptop anyways? session instead?
-            console.log("Page loaded. Enforcing Switch State on Youtube with: ", state, page);
+            console.log("Page loaded. Enforcing Switch State on Youtube with begin: ", state, page);
             enforceSwitchStateOnYouTube(state, page);
         })
     });
