@@ -33,6 +33,9 @@ function enforceSwitchStateOnYouTubeWatch(value) {
     waitForElm("#comments").then((element) => {
         visibility(value, element)
     });
+    waitForElm("#buttons").then((element) => {
+        visibility(value, element.children[1]);
+    });
 }
 
 function enforceSwitchStateOnYouTubeHome(value) {
@@ -52,12 +55,10 @@ function enforceSwitchStateOnYouTubeHome(value) {
         visibility(value, element.children[1]);
     });
     
-    /* TODO: there are two items in the html page... what am I to do?
-    waitForElm("#items").then((element) => {
+    waitForElm("#sections #items").then((element) => {
         visibility(value, element.children[1]);
         console.log(element.children[1]);
     });
-    */
 }
 
 function enforceSwitchStateOnYouTubeFeed(value) {
@@ -72,6 +73,11 @@ function enforceSwitchStateOnYouTubeFeed(value) {
     
     waitForElm("#buttons").then((element) => {
         visibility(value, element.children[1]);
+    });
+    
+    waitForElm("#sections #items").then((element) => {
+        visibility(value, element.children[1]);
+        console.log(element.children[1]);
     });
 }
 
