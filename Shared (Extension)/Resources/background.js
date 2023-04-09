@@ -8,16 +8,16 @@ function extensionInstallation(){
 }
 
 /**
- * Function that is called when the extension is starting up.
+ * Function that is called when the browser application has been opened.
  */
 function extensionOnStartupHandler(){
     browser.storage.local.get('switchState',(response) => {
         value = response.switchState;
         browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
             tab = (tabs.length === 0 ? tabs : tabs[0]);
-            console.log("extension starting for the first time...")
-            console.log("running urlUpdate...")
-            urlUpdated(tab.id, tab.url);
+            if (tab.id && tab.url){
+                urlUpdated(tab.id, tab.url);
+            }
         });
     });
 }
@@ -88,7 +88,6 @@ async function urlUpdated(tabId, givenURL){
     }
 
     if (givenURL.match("^https://www\.youtube\.com/.*$") == givenURL) {
-        console.log("In youtube page");
         let response = await browser.storage.local.get('youTubePage');
         /*
         if (response.youTubePage){
@@ -140,7 +139,6 @@ function handleTabClosed(tabId, removeInfo){
     } else {
         console.log("tab closed: ", tabId);
     }
-    
 }
 
 // Listeners
