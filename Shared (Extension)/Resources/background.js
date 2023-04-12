@@ -141,10 +141,23 @@ function handleTabClosed(tabId, removeInfo){
     }
 }
 
+/**
+ * Logic to be executed when when the user focuses on a new tab/window.
+ * @param  {[object]} activeInfo [ID of the tab that was made active, and ID of its window.]
+ */
+async function focusChanged(activeInfo){
+    let tabInfo = await browser.tabs.get(activeInfo.tabId);
+    console.log("changed tabs");
+    urlUpdated(activeInfo.tabId, tabInfo.url);
+}
+
 // Listeners
 browser.tabs.onRemoved.addListener(handleTabClosed);
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {urlUpdated(tabId, tabInfo.url)});
+browser.tabs.onActivated.addListener(focusChanged);
 
 browser.runtime.onInstalled.addListener(extensionInstallation);
 browser.runtime.onStartup.addListener(extensionOnStartupHandler);
 browser.runtime.onMessage.addListener(handleMessage);
+
+
