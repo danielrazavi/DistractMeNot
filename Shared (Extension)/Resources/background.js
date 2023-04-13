@@ -1,11 +1,15 @@
 /**
  * Function that is called when the extension is installed for the first time.
  */
-function extensionInstallation(){
-    browser.storage.local.set({'switchState': false}, () => {
-        console.log("Storage Succesful");
-    });
+async function extensionInstallation(){
+    await browser.storage.local.set({'switchState': false});
+    console.log("Storage Succesful");
     
+    let tabs = await browser.tabs.query({});
+    console.log("injecting all tabs:");
+    for (var i = 0; i < tabs.length; i++) {
+        urlUpdated(tabs[i].id, tabs[i].url);
+    }
 }
 
 /**
@@ -64,6 +68,7 @@ async function urlUpdated(tabId, givenURL){
  * @param  {[function]} sendResponse [function that can be used to send a response back to the sender.]
  */
 function handleMessage(request, sender, sendResponse) {
+    /*// NOT NEEDED ANYMORE.
     if (request.injectContentScript == true){
         console.log("popup is requesting content script injection.");
         browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
@@ -72,8 +77,8 @@ function handleMessage(request, sender, sendResponse) {
             console.log("popup's request to inject content script has been done.")
         });
         sendResponse({successful: "injection successful."});
-    }
-    
+    }*/
+    sendResponse({successful: "listener is not doing anything in the backend."});
 }
 
 /**

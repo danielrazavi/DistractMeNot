@@ -30,15 +30,6 @@ async function switchLogic(switchStateFromStorage, button, mode) {
     if (mode == 'click'){
         switchStateFromStorage = !switchStateFromStorage;
         updateStorage = true;
-        
-    } else if (mode == 'init'){
-        // TODO: https://is.gd/u4bNrD
-        try {
-            const response = await browser.runtime.sendMessage({injectContentScript: true});
-            console.log(`Received a Message: ${response.successful}`);
-        } catch(error){
-            console.error(`Error: ${error}`);
-        }
     }
     
     console.log("sendMessage 2");
