@@ -40,43 +40,6 @@ async function executeTheScript(targetId, fileString){
 }
 
 /**
- * Will remove all specified key/value pairs from local storage.
- */
-async function removeAllPageKeys(){
-    try{
-        // For multiple:        browser.storage.local.remove(['testy','youTubePage']);
-        browser.storage.local.remove(["youTubePage"]);
-    }
-    catch(error){
-        console.log("removeAllPageKeys failed.", error)
-    }
-}
-
-/**
- * It updates the local storage key "youTubePage". It uses regex to identify the current page the user is on in YouTube.
- * @param  {[string]} url [a url address given]
- */
-function handleYouTubePages(url){
-    
-    let page;
-    
-    if (url.match("^https://www\.youtube\.com/?$") == url) {
-        page = "home";
-    } else if (url.match("^https://www\.youtube\.com/watch.*$") == url) {
-        page = "watch";
-    } else if (url.match("^https://www\.youtube\.com/feed/.*$") == url) {
-        page = "feed";
-    } else if (url.match("^https://www\.youtube\.com/shorts/.*$") == url) {
-        page = "shorts";
-    } else {
-        page = "other"
-    }
-        
-    console.log("We're in YouTube ", page);
-    browser.storage.local.set({'youTubePage': page});
-}
-
-/**
  * a handler function that is executed when there is a url change in a tab. It understand where the current general address is and based on that calls relative helper functions that will then inject the necessary logic needed to make said website distracting free.
  * @param  {[number]} tabId [The Tab ID where the content script will be injected.]
  * @param  {[string]} givenURL [a url address given.]
@@ -88,25 +51,11 @@ async function urlUpdated(tabId, givenURL){
     }
 
     if (givenURL.match("^https://www\.youtube\.com/.*$") == givenURL) {
-        let response = await browser.storage.local.get('youTubePage');
-        /*
-        if (response.youTubePage){
-            console.log("no need for injection");
-            handleYouTubePages(givenURL);
-        } else {
-            console.log("injecting");
-            executeTheScript(tabId, "/content.js");
-            removeAllPageKeys();
-            handleYouTubePages(givenURL);
-        }
-        */
         executeTheScript(tabId, "/content.js");
-        removeAllPageKeys();
-        handleYouTubePages(givenURL);
+        browser.storage.local.set({'youTubePage': 'home'});
 
     } else {
         console.log("In an unrecgonized page");
-        removeAllPageKeys();
     }
 }
 
@@ -159,5 +108,3 @@ browser.tabs.onActivated.addListener(focusChanged);
 browser.runtime.onInstalled.addListener(extensionInstallation);
 browser.runtime.onStartup.addListener(extensionOnStartupHandler);
 browser.runtime.onMessage.addListener(handleMessage);
-
-
