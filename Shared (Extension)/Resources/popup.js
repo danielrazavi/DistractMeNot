@@ -31,20 +31,6 @@ async function switchLogic(switchStateFromStorage, button, mode) {
         switchStateFromStorage = !switchStateFromStorage;
         updateStorage = true;
         
-        /*
-        // ✅ Experiment: Sending message to background.js
-        const sending = browser.runtime.sendMessage({injectContentScript: true});
-        sending.then(handleResponse, handleError);
-        
-        // ✅ Experiment: Sending message to content.js
-        const sendingOver = browser.tabs
-            .query({
-              currentWindow: true,
-              active: true,
-            });
-        sendingOver.then(sendMessageToTabs).catch(onError);
-        */
-        
     } else if (mode == 'init'){
         // TODO: https://is.gd/u4bNrD
         try {

@@ -72,23 +72,39 @@ function enforceSwitchStateOnYouTube(value) {
     waitForElm("#sections #items").then((element) => {
         visibility(value, element.children[1]);
     });
+
+    console.log("Enforced Switch State: ", value);
 }
 
 browser.storage.onChanged.addListener((changes, area) => {
     if (area == 'local' && Object.keys(changes).length == 1 && 'switchState' in changes){
-        console.log("Page loaded. Enforcing Switch State on Youtube with (switchState change): ", changes['switchState'].newValue);
+        console.log("Storage Listener: Heard a change switchState. New Value is: ", changes['switchState'].newValue);
         enforceSwitchStateOnYouTube(changes['switchState'].newValue);
-    } else if (area == 'local' && Object.keys(changes).length == 1 && 'youTubePage' in changes) {
-        console.log("Page loaded. Enforcing Switch State on Youtube with (youtubepage change): ", state);
-        enforceSwitchStateOnYouTube(state);
     }
 });
+
+
+async function backgroundMessageHandler(data, sender){
+    if (data.enforceScript) {
+        let switchStateResponse = await browser.storage.local.get('switchState');
+        state = switchStateResponse.switchState;
+        if (state == true){
+            console.log("Got a message from backend to enforce switchState.");
+        }
+        enforceSwitchStateOnYouTube(state);
+        return Promise.resolve('enforceSwitchStateOnYouTube completed.');
+    }
+    return false;
+}
+
+browser.runtime.onMessage.addListener(backgroundMessageHandler);
+
 
 //Content.js
 window.onload = function() { // TODO: what does this window.onload even do? Is it being used correctly?
     browser.storage.local.get('switchState', (switchStateResponse) => {
         state = switchStateResponse.switchState;
-        console.log("Page loaded. Enforcing Switch State on Youtube with (begin): ", state);
+        console.log("DistractMeNot script Injected");
         enforceSwitchStateOnYouTube(state);
     });
 }

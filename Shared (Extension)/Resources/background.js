@@ -5,21 +5,19 @@ function extensionInstallation(){
     browser.storage.local.set({'switchState': false}, () => {
         console.log("Storage Succesful");
     });
+    
 }
 
 /**
  * Function that is called when the browser application has been opened.
  */
-function extensionOnStartupHandler(){
-    browser.storage.local.get('switchState',(response) => {
-        value = response.switchState;
-        browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
-            tab = (tabs.length === 0 ? tabs : tabs[0]);
-            if (tab.id && tab.url){
-                urlUpdated(tab.id, tab.url);
-            }
-        });
-    });
+async function extensionOnStartupHandler(){
+    console.log("extensionOnStartupHandler");
+    let tabs = browser.tabs.query({active : true, currentWindow: true});
+    let tab = (tabs.length === 0 ? tabs : tabs[0]);
+    if (tab.id && tab.url){
+        urlUpdated(tab.id, tab.url);
+    }
 }
 
 /**
@@ -28,7 +26,7 @@ function extensionOnStartupHandler(){
  * @param  {[string]} fileString [the file path of the content script that will be injected]
  */
 async function executeTheScript(targetId, fileString){
-    console.log("executeTheScript", targetId, fileString);
+    console.log("executeTheScript");
     try{
         let result = await browser.scripting.executeScript({
             target: { tabId: targetId },
@@ -45,15 +43,15 @@ async function executeTheScript(targetId, fileString){
  * @param  {[string]} givenURL [a url address given.]
  */
 async function urlUpdated(tabId, givenURL){
-
+    console.log("urlUpdated");
+    
     if (!givenURL){
         return;
     }
 
     if (givenURL.match("^https://www\.youtube\.com/.*$") == givenURL) {
-        executeTheScript(tabId, "/content.js");
-        browser.storage.local.set({'youTubePage': 'home'});
-
+        await executeTheScript(tabId, "/content.js");
+        sendMessageToMainTab(tabId, { enforceScript: true });
     } else {
         console.log("In an unrecgonized page");
     }
@@ -71,6 +69,7 @@ function handleMessage(request, sender, sendResponse) {
         browser.tabs.query({active : true, currentWindow: true}, function (tabs) {
             tab = (tabs.length === 0 ? tabs : tabs[0]);
             urlUpdated(tab.id, tab.url);
+            console.log("popup's request to inject content script has been done.")
         });
         sendResponse({successful: "injection successful."});
     }
@@ -97,14 +96,32 @@ function handleTabClosed(tabId, removeInfo){
 async function focusChanged(activeInfo){
     let tabInfo = await browser.tabs.get(activeInfo.tabId);
     console.log("changed tabs");
-    urlUpdated(activeInfo.tabId, tabInfo.url);
+    // urlUpdated(activeInfo.tabId, tabInfo.url);
 }
+
+const filter = {
+    properties: ["url"]
+}
+
 
 // Listeners
 browser.tabs.onRemoved.addListener(handleTabClosed);
-browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {urlUpdated(tabId, tabInfo.url)});
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+    console.log("tab updated listener", );
+    urlUpdated(tabId, tabInfo.url)
+}, filter);
 browser.tabs.onActivated.addListener(focusChanged);
 
 browser.runtime.onInstalled.addListener(extensionInstallation);
 browser.runtime.onStartup.addListener(extensionOnStartupHandler);
 browser.runtime.onMessage.addListener(handleMessage);
+
+
+async function sendMessageToMainTab(givenTabId, messageContent) {
+    console.log("sendMessageToMainTab");
+    // let tabInfo = await browser.tabs.get(givenTabId);
+    // { greeting: "Hi from background script" }
+    let response = await browser.tabs.sendMessage(givenTabId, messageContent);
+    console.log("Message from the content script:", response);
+
+}
