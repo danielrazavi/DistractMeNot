@@ -16,7 +16,7 @@ function setButtonConfigs(button, switchState){
     button.innerText = switchState.name;
 }
 
-/* 📍
+/*
  Decides how to set the button configuration and local storage based off of what the state of the switch currently is and whether if it is in init mode for click mode. If "init" mode, then it will simply set the button as what the state is. if "click" mode, then it toggles what the switch state is and configures the button, while updating the local storage.
  */
 async function switchLogic(switchStateFromStorage, button, mode) {
@@ -32,8 +32,6 @@ async function switchLogic(switchStateFromStorage, button, mode) {
         updateStorage = true;
     }
     
-    console.log("sendMessage 2");
-    
     let localSwitchState;
     if (switchStateFromStorage){
         localSwitchState = switchStateOn;
@@ -46,8 +44,6 @@ async function switchLogic(switchStateFromStorage, button, mode) {
     if (updateStorage){
         setSwitchState(localSwitchState.value);
     }
-    console.log("sendMessage 3");
-    
 }
 
 /*
@@ -57,7 +53,6 @@ async function switchLogic(switchStateFromStorage, button, mode) {
 async function getSwitchState() {
     try{
         return browser.storage.local.get('switchState');
-        //getSwichStateCallback(response.switchState, button, mode);
     }
     catch(error){
         console.log("getSwitchState failed.", error)
