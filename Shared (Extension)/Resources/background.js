@@ -2,8 +2,8 @@
  * Function that is called when the extension is installed for the first time.
  */
 async function extensionInstallation(){
-    await browser.storage.local.set({'switchState': false});
-    console.log("Storage Succesful");
+    browser.storage.local.set({'switchState': false})
+        .then(console.log("Storage Succesful"));
     
     let tabs = await browser.tabs.query({});
     console.log("injecting all tabs:");
@@ -17,10 +17,11 @@ async function extensionInstallation(){
  */
 async function extensionOnStartupHandler(){
     console.log("extensionOnStartupHandler");
-    let tabs = browser.tabs.query({active : true, currentWindow: true});
-    let tab = (tabs.length === 0 ? tabs : tabs[0]);
-    if (tab.id && tab.url){
-        urlUpdated(tab.id, tab.url);
+    let tabs = await browser.tabs.query({});
+    for (var i = 0; i < tabs.length; i++) {
+        if (tabs[i].id && tabs[i].url){
+            urlUpdated(tabs[i].id, tabs[i].url);
+        }
     }
 }
 
@@ -47,15 +48,14 @@ async function executeTheScript(targetId, fileString){
  * @param  {[string]} givenURL [a url address given.]
  */
 async function urlUpdated(tabId, givenURL){
-    console.log("urlUpdated");
-    
     if (!givenURL){
         return;
     }
+    
+    console.log("urlUpdated");
 
     if (givenURL.match("^https://www\.youtube\.com/.*$") == givenURL) {
-        await executeTheScript(tabId, "/content.js");
-        sendMessageToMainTab(tabId, { enforceScript: true });
+        executeTheScript(tabId, "/content.js").then(sendMessageToTab(tabId, { enforceScript: true }));
     } else {
         console.log("In an unrecgonized page");
     }
@@ -101,7 +101,7 @@ function handleTabClosed(tabId, removeInfo){
 async function focusChanged(activeInfo){
     let tabInfo = await browser.tabs.get(activeInfo.tabId);
     console.log("changed tabs");
-    // urlUpdated(activeInfo.tabId, tabInfo.url);
+    urlUpdated(activeInfo.tabId, tabInfo.url);
 }
 
 const filter = {
@@ -112,7 +112,7 @@ const filter = {
 // Listeners
 browser.tabs.onRemoved.addListener(handleTabClosed);
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
-    console.log("tab updated listener", );
+    console.log("tab updated listener");
     urlUpdated(tabId, tabInfo.url)
 }, filter);
 browser.tabs.onActivated.addListener(focusChanged);
@@ -122,10 +122,8 @@ browser.runtime.onStartup.addListener(extensionOnStartupHandler);
 browser.runtime.onMessage.addListener(handleMessage);
 
 
-async function sendMessageToMainTab(givenTabId, messageContent) {
-    console.log("sendMessageToMainTab");
-    // let tabInfo = await browser.tabs.get(givenTabId);
-    // { greeting: "Hi from background script" }
+async function sendMessageToTab(givenTabId, messageContent) {
+    console.log("sendMessageToTab");
     let response = await browser.tabs.sendMessage(givenTabId, messageContent);
     console.log("Message from the content script:", response);
 

@@ -99,7 +99,6 @@ async function backgroundMessageHandler(data, sender){
 
 browser.runtime.onMessage.addListener(backgroundMessageHandler);
 
-
 //Content.js
 window.onload = function() { // TODO: what does this window.onload even do? Is it being used correctly?
     browser.storage.local.get('switchState', (switchStateResponse) => {
