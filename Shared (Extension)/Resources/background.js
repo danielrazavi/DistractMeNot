@@ -104,6 +104,17 @@ async function focusChanged(activeInfo){
     urlUpdated(activeInfo.tabId, tabInfo.url);
 }
 
+async function handleNewWindow(window){
+    console.log("New window made.");
+    let tabs = window.tabs;
+    for (var i = 0; i < tabs.length; i++) {
+        if (tabs[i].id && tabs[i].url){
+            urlUpdated(tabs[i].id, tabs[i].url);
+        }
+    }
+}
+
+
 const filter = {
     properties: ["url"]
 }
@@ -120,6 +131,7 @@ browser.tabs.onActivated.addListener(focusChanged);
 browser.runtime.onInstalled.addListener(extensionInstallation);
 browser.runtime.onStartup.addListener(extensionOnStartupHandler);
 browser.runtime.onMessage.addListener(handleMessage);
+browser.windows.onCreated.addListener(handleNewWindow);
 
 
 async function sendMessageToTab(givenTabId, messageContent) {
