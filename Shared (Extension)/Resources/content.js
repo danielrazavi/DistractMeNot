@@ -26,6 +26,19 @@ function visibility(value, element) {
     }
 }
 
+// CURRENTLY WORKING ON!
+async function enforceFlipCommentsRecommended(){
+    let secondaryInnerElement = await waitForElm("#secondary-inner");
+    let belowElement = await waitForElm("#below");
+    
+    /*for (let i = 0, len = secondaryInnerElement.childElementCount; i < len; i++){
+        belowElement.append(secondaryInnerElement.children[i])
+    }*/
+    
+    await secondaryInnerElement.append(belowElement.children[8]);
+    await belowElement.append(secondaryInnerElement.chilren[4]);
+}
+
 function enforceSwitchStateOnYouTube(value) {
     // document.querySelector("#something").style.display = "none";
     
@@ -94,12 +107,15 @@ function enforceSwitchStateOnYouTube(value) {
     console.log("Enforced Switch State: ", value);
 }
 
-browser.storage.onChanged.addListener((changes, area) => {
+async function storageOnChangedListenerHandler(changes, area){
     if (area == 'local' && Object.keys(changes).length == 1 && 'switchState' in changes){
         console.log("Storage Listener: Heard a change switchState. New Value is: ", changes['switchState'].newValue);
-        enforceSwitchStateOnYouTube(changes['switchState'].newValue);
+//        enforceSwitchStateOnYouTube(changes['switchState'].newValue);
+        await enforceFlipCommentsRecommended();
     }
-});
+}
+
+browser.storage.onChanged.addListener(storageOnChangedListenerHandler);
 
 
 async function backgroundMessageHandler(data, sender){
@@ -109,7 +125,9 @@ async function backgroundMessageHandler(data, sender){
         if (state == true){
             console.log("Got a message from backend to enforce switchState.");
         }
-        enforceSwitchStateOnYouTube(state);
+        // TODO: when enforceSwitchStateOnYouTube is commented out, it flips them perfectly, any other permutation of it being on makes it not work, why? how are they interfering?
+//        enforceSwitchStateOnYouTube(state);
+        await enforceFlipCommentsRecommended();
         return Promise.resolve('enforceSwitchStateOnYouTube completed.');
     }
     return false;
@@ -122,6 +140,7 @@ window.onload = function() { // TODO: what does this window.onload even do? Is i
     browser.storage.local.get('switchState', (switchStateResponse) => {
         state = switchStateResponse.switchState;
         console.log("DistractMeNot script Injected");
-        enforceSwitchStateOnYouTube(state);
+//        enforceSwitchStateOnYouTube(state);
+        enforceFlipCommentsRecommended();
     });
 }
