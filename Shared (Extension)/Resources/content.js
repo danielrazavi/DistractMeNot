@@ -26,6 +26,37 @@ function visibility(value, element) {
     }
 }
 
+function overlayCardComments(state){
+    if (state){
+        var videoHeight = document.querySelector("video.video-stream.html5-main-video").style.height;
+        var styles = `
+            .parent {
+                height: ${videoHeight};
+                width: 100%;
+            }
+            .square {
+                height: 100%;
+                width: 100%;
+                background-color: #777;
+             }
+         `;
+         var styleSheet = document.createElement("style");
+         styleSheet.innerText = styles;
+         document.head.appendChild(styleSheet);
+         
+         var div = document.createElement('div');
+         div.innerHTML = '<div class="square"></div>';
+         div.classList.add('parent')
+         div.style.display = 'flex';
+         div.style.justifyContent = 'center';
+         document.querySelector("#secondary #secondary-inner").appendChild(div);
+    } else {
+        if (document.querySelector("#secondary #secondary-inner .parent")){
+            document.querySelector("#secondary #secondary-inner .parent").remove();
+        }
+    }
+}
+
 function enforceSwitchStateOnYouTube(value) {
     // document.querySelector("#something").style.display = "none";
     
@@ -90,6 +121,10 @@ function enforceSwitchStateOnYouTube(value) {
         }
         
     });
+    
+    // This needs to happen once, and not many times. Needs to be a singlton.
+    // This also needs to be toggled, so when a false value is passed it needs to go back in and remove the parent div.
+    overlayCardComments(value);
 
     console.log("Enforced Switch State: ", value);
 }
