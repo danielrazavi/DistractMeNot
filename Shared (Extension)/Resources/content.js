@@ -27,7 +27,7 @@ function visibility(value, element) {
 }
 
 function enforceSwitchStateOnYouTube(value) {
-    // document.querySelector("#page-manager #primary .ytd-two-column-browse-results-renderer #contents").style.display = "none";
+    // document.querySelector("#something").style.display = "none";
     
     // recommended video watch
     waitForElm("#secondary #secondary-inner #related").then((element) => {
@@ -71,6 +71,24 @@ function enforceSwitchStateOnYouTube(value) {
     // Shorts Button - Side Bar
     waitForElm("#sections #items").then((element) => {
         visibility(value, element.children[1]);
+    });
+    
+    // Subscription Choices - no shorts and less than 10 videos.
+    waitForElm("#page-manager #primary #contents.style-scope.ytd-section-list-renderer").then((element) => {
+        let stop = Math.min(element.childElementCount, 10);
+        
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            let isShort = element.children[i].querySelectorAll("ytd-thumbnail-overlay-time-status-renderer[overlay-style='SHORTS']").length == 1;
+            
+            if (isShort && i < stop){
+                stop+=1;
+            }
+            
+            if (i > stop || isShort){
+                visibility(value, element.children[i]);
+            }
+        }
+        
     });
 
     console.log("Enforced Switch State: ", value);
