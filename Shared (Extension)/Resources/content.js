@@ -73,7 +73,7 @@ async function enforceSwitchStateOnYouTube(value) {
     // recommended video watch
     await waitForElm("#secondary #secondary-inner").then((element) => {
         for(var i = 0, len = element.childElementCount ; i < len; ++i){
-            if (element.classList.contains(".parent")){
+            if (element.children[i].classList.contains("parent")){
                 visibility(!value, element.children[i]);
             } else {
                 visibility(value, element.children[i]);
