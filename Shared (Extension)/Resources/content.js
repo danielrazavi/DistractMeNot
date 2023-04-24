@@ -67,13 +67,17 @@ function overlayCardComments(state){
     }
 }
 
-function enforceSwitchStateOnYouTube(value) {
+async function enforceSwitchStateOnYouTube(value) {
     // document.querySelector("#something").style.display = "none";
     
     // recommended video watch
-    waitForElm("#secondary #secondary-inner").then((element) => {
+    await waitForElm("#secondary #secondary-inner").then((element) => {
         for(var i = 0, len = element.childElementCount ; i < len; ++i){
-            visibility(value, element.children[i]);
+            if (element.classList.contains(".parent")){
+                visibility(!value, element.children[i]);
+            } else {
+                visibility(value, element.children[i]);
+            }
         }
     });
     
