@@ -27,17 +27,27 @@ function visibility(value, element) {
 }
 
 function overlayCardComments(state){
-    if (state){
+    
+    if (typeof state == 'undefined'){
+        return;
+    }
+    
+    if (state == true &&
+        document.querySelector("#secondary #secondary-inner .parent") == null){
         var videoHeight = document.querySelector("video.video-stream.html5-main-video").style.height;
         var styles = `
             .parent {
                 height: ${videoHeight};
                 width: 100%;
+                line-height: ${videoHeight};
             }
             .square {
+                border-radius: 15px;
+                text-align: center;
                 height: 100%;
                 width: 100%;
-                background-color: #777;
+                background-color: #E7F3FF;
+                color: #1877F2;
              }
          `;
          var styleSheet = document.createElement("style");
@@ -45,25 +55,26 @@ function overlayCardComments(state){
          document.head.appendChild(styleSheet);
          
          var div = document.createElement('div');
-         div.innerHTML = '<div class="square"></div>';
+         div.innerHTML = '<div class="square">DistractMeNot Extension is currently active.</div>';
          div.classList.add('parent')
          div.style.display = 'flex';
          div.style.justifyContent = 'center';
          document.querySelector("#secondary #secondary-inner").appendChild(div);
-    } else {
-        if (document.querySelector("#secondary #secondary-inner .parent")){
-            document.querySelector("#secondary #secondary-inner .parent").remove();
-        }
+    } else if (state == false && document.querySelector("#secondary #secondary-inner .parent")) {
+        document.querySelector("#secondary #secondary-inner .parent").remove();
     }
 }
 
-function enforceSwitchStateOnYouTube(value) {
+async function enforceSwitchStateOnYouTube(value) {
     // document.querySelector("#something").style.display = "none";
     
     // recommended video watch
-    waitForElm("#secondary #secondary-inner #related").then((element) => {
-        visibility(value, element)
+    await waitForElm("#secondary #secondary-inner").then((element) => {
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            visibility(value, element.children[i]);
+        }
     });
+    
     
     // comments
     waitForElm("#comments #sections").then((element) => {
@@ -122,9 +133,7 @@ function enforceSwitchStateOnYouTube(value) {
         
     });
     
-    // This needs to happen once, and not many times. Needs to be a singlton.
-    // This also needs to be toggled, so when a false value is passed it needs to go back in and remove the parent div.
-    overlayCardComments(value);
+    await overlayCardComments(value);
 
     console.log("Enforced Switch State: ", value);
 }
@@ -135,7 +144,6 @@ browser.storage.onChanged.addListener((changes, area) => {
         enforceSwitchStateOnYouTube(changes['switchState'].newValue);
     }
 });
-
 
 async function backgroundMessageHandler(data, sender){
     if (data.enforceScript) {
