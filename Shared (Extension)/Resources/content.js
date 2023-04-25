@@ -26,42 +26,45 @@ function visibility(value, element) {
     }
 }
 
-function overlayCardComments(state){
+function overlayCardComments(state, selector, name){
     
     if (typeof state == 'undefined'){
         return;
     }
     
     if (state == true &&
-        document.querySelector("#secondary #secondary-inner .parent") == null){
+//        document.querySelector("#secondary #secondary-inner .parent") == null){
+        document.querySelector(selector + " .parent") == null){
         var videoHeight = document.querySelector("video.video-stream.html5-main-video").style.height;
         var styles = `
             .parent {
-                height: ${videoHeight};
                 width: 100%;
-                line-height: ${videoHeight};
             }
             .square {
                 border-radius: 15px;
                 text-align: center;
+                padding-top: calc(${videoHeight}/2 - 12px);
+                padding-bottom: calc(${videoHeight}/2 - 12px);
                 height: 100%;
                 width: 100%;
                 background-color: #E7F3FF;
                 color: #1877F2;
              }
          `;
-         var styleSheet = document.createElement("style");
-         styleSheet.innerText = styles;
-         document.head.appendChild(styleSheet);
+        var styleSheet = document.createElement("style");
+        styleSheet.innerText = styles;
+        document.head.appendChild(styleSheet);
          
-         var div = document.createElement('div');
-         div.innerHTML = '<div class="square">DistractMeNot Extension is currently active.</div>';
-         div.classList.add('parent')
-         div.style.display = 'flex';
-         div.style.justifyContent = 'center';
-         document.querySelector("#secondary #secondary-inner").appendChild(div);
-    } else if (state == false && document.querySelector("#secondary #secondary-inner .parent")) {
-        document.querySelector("#secondary #secondary-inner .parent").remove();
+        var div = document.createElement('div');
+        div.innerHTML = '<div class="square">DistractMeNot Extension is currently active. '+"<br />"+'Hiding '+name+'.</div>';
+        div.classList.add('parent')
+        div.style.display = 'flex';
+        div.style.justifyContent = 'center';
+        
+        document.querySelector(selector).appendChild(div);
+    
+    } else if (state == false && document.querySelector(selector + " .parent")) {
+        document.querySelector(selector + " .parent").remove();
     } else {
         return;
     }
@@ -83,8 +86,14 @@ async function enforceSwitchStateOnYouTube(value) {
     
     
     // comments
-    waitForElm("#comments #sections").then((element) => {
-        visibility(value, element)
+    waitForElm("#comments").then((element) => {
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            if (element.children[i].classList.contains("parent")){
+                visibility(!value, element.children[i]);
+            } else {
+                visibility(value, element.children[i]);
+            }
+        }
     });
     
     // Skipping the ads
@@ -139,7 +148,8 @@ async function enforceSwitchStateOnYouTube(value) {
         
     });
     
-    overlayCardComments(value);
+    overlayCardComments(value, "#secondary #secondary-inner", "Recommendations");
+    overlayCardComments(value, "#comments", "Comments");
 
     console.log("Enforced Switch State: ", value);
 }
