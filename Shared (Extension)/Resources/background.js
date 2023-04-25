@@ -100,8 +100,7 @@ function handleTabClosed(tabId, removeInfo){
  */
 async function focusChanged(activeInfo){
     let tabInfo = await browser.tabs.get(activeInfo.tabId);
-    console.log("changed tabs");
-    urlUpdated(activeInfo.tabId, tabInfo.url);
+    console.log("changed tabs - doing nothing");
 }
 
 async function handleNewWindow(window){

@@ -33,9 +33,15 @@ function overlayCardComments(state, selector, name){
     }
     
     if (state == true &&
-//        document.querySelector("#secondary #secondary-inner .parent") == null){
         document.querySelector(selector + " .parent") == null){
         var videoHeight = document.querySelector("video.video-stream.html5-main-video").style.height;
+        
+        if (videoHeight == ""){
+            videoHeight = document.querySelector(selector).style.height;
+            if (videoHeight == ""){
+                videoHeight = "500px";
+            };
+        }
         var styles = `
             .parent {
                 width: 100%;
@@ -49,8 +55,10 @@ function overlayCardComments(state, selector, name){
                 width: 100%;
                 background-color: #E7F3FF;
                 color: #1877F2;
-             }
-         `;
+             }`;
+        
+        
+        
         var styleSheet = document.createElement("style");
         styleSheet.innerText = styles;
         document.head.appendChild(styleSheet);
@@ -73,7 +81,7 @@ function overlayCardComments(state, selector, name){
 async function enforceSwitchStateOnYouTube(value) {
     // document.querySelector("#something").style.display = "none";
     
-    // recommended video watch
+    // Recommended video watch
     await waitForElm("#secondary #secondary-inner").then((element) => {
         for(var i = 0, len = element.childElementCount ; i < len; ++i){
             if (element.children[i].classList.contains("parent")){
@@ -82,10 +90,11 @@ async function enforceSwitchStateOnYouTube(value) {
                 visibility(value, element.children[i]);
             }
         }
+        overlayCardComments(value, "#secondary #secondary-inner", "Recommendations");
     });
     
     
-    // comments
+    // Comments
     waitForElm("#comments").then((element) => {
         for(var i = 0, len = element.childElementCount ; i < len; ++i){
             if (element.children[i].classList.contains("parent")){
@@ -94,6 +103,7 @@ async function enforceSwitchStateOnYouTube(value) {
                 visibility(value, element.children[i]);
             }
         }
+        overlayCardComments(value, "#comments", "Comments");
     });
     
     // Skipping the ads
@@ -101,14 +111,21 @@ async function enforceSwitchStateOnYouTube(value) {
         element.click();
     })
     
-    // recommend chips
+    // Recommend chips
     waitForElm("#page-manager #primary #header").then((element) => {
         visibility(value, element)
     });
     
-    // recommendations
+    // Home Recommendations
     waitForElm("#page-manager #primary .ytd-two-column-browse-results-renderer #contents").then((element) => {
-        visibility(value, element)
+        for(var i = 0, len = element.childElementCount ; i < len; ++i){
+            if (element.children[i].classList.contains("parent")){
+                visibility(!value, element.children[i]);
+            } else {
+                visibility(value, element.children[i]);
+            }
+        }
+        overlayCardComments(value, "#page-manager #primary .ytd-two-column-browse-results-renderer #contents", "Home Feed");
     });
     
     // Side Bar - Subscriptions and Explore and Made from YouTube
@@ -147,9 +164,6 @@ async function enforceSwitchStateOnYouTube(value) {
         }
         
     });
-    
-    overlayCardComments(value, "#secondary #secondary-inner", "Recommendations");
-    overlayCardComments(value, "#comments", "Comments");
 
     console.log("Enforced Switch State: ", value);
 }
